@@ -1,0 +1,136 @@
+/* ============ 404 PAGE ============ */
+body.nf {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* faint grid + pointer glow (flat, no gradients on the page itself) */
+body.nf::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 44px 44px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.nf-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(360px circle at var(--gx, 50%) var(--gy, 40%), var(--violet-soft), transparent 70%);
+}
+
+.nf-scan {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background: repeating-linear-gradient(0deg, #fff 0 1px, transparent 1px 3px);
+}
+
+.nf-theme { position: fixed; top: 16px; right: 16px; z-index: 5; }
+
+.nf-card {
+  position: relative;
+  z-index: 1;
+  width: min(640px, 100%);
+  padding: clamp(24px, 4vw, 40px);
+  text-align: center;
+  border-radius: var(--radius-xl);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(30px) saturate(190%);
+  backdrop-filter: blur(30px) saturate(190%);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--glass-shadow);
+  animation: nfIn 0.5s var(--ease) both;
+}
+
+@keyframes nfIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.nf-brand { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.nf-brand .brand-name { font-weight: 600; }
+
+/* route trace */
+.nf-trace { max-width: 380px; margin: 0 auto 6px; }
+.nf-trace svg { width: 100%; height: auto; overflow: visible; }
+.t-ok { stroke: var(--violet); stroke-width: 2.5; fill: none; stroke-linecap: round; }
+.t-break { stroke: var(--text-faint); stroke-width: 2; stroke-dasharray: 5 6; fill: none; opacity: 0.7; }
+.t-node { fill: var(--surface); stroke: var(--violet); stroke-width: 2.5; }
+.t-node.is-error { stroke: var(--amber); fill: var(--amber); }
+.t-node.is-ghost { stroke: var(--text-faint); stroke-dasharray: 3 3; fill: none; }
+.t-ping { fill: none; stroke: var(--amber); stroke-width: 1.5; transform-box: fill-box; transform-origin: center; animation: ping 2s ease-out infinite; }
+@keyframes ping { from { transform: scale(0.8); opacity: 0.8; } to { transform: scale(2.6); opacity: 0; } }
+.t-label { font: 500 10px var(--font-mono); fill: var(--text-faint); }
+.t-label.is-error { fill: var(--amber); font-weight: 700; }
+
+/* outlined, glitching 404 */
+.nf-num {
+  position: relative;
+  display: inline-block;
+  margin: 6px 0 4px;
+  font: 800 clamp(84px, 18vw, 132px) / 1 var(--font-display);
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 2.5px var(--violet);
+  user-select: none;
+}
+.nf-num::before,
+.nf-num::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  -webkit-text-stroke: 2.5px var(--cyan);
+  opacity: 0;
+}
+.nf-num::before { clip-path: inset(0 0 55% 0); animation: glitchA 4.5s steps(1) infinite; }
+.nf-num::after { clip-path: inset(55% 0 0 0); -webkit-text-stroke-color: var(--amber); animation: glitchB 4.5s steps(1) infinite; }
+@keyframes glitchA { 0%, 92%, 100% { opacity: 0; transform: none; } 93% { opacity: 0.9; transform: translate(-4px, 0); } 96% { opacity: 0.9; transform: translate(3px, 0); } 98% { opacity: 0; } }
+@keyframes glitchB { 0%, 93%, 100% { opacity: 0; transform: none; } 94% { opacity: 0.9; transform: translate(4px, 0); } 97% { opacity: 0.9; transform: translate(-3px, 0); } 99% { opacity: 0; } }
+
+.nf-card h1 { font-size: clamp(22px, 3.4vw, 30px); letter-spacing: -0.025em; margin: 6px 0 10px; }
+.nf-desc { max-width: 46ch; margin: 0 auto 22px; font-size: 15px; }
+
+/* terminal */
+.nf-term {
+  text-align: left;
+  margin: 0 auto 24px;
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font: 500 13px / 1.9 var(--font-mono);
+  color: var(--text-muted);
+  overflow-x: auto;
+}
+.t-line { opacity: 0; transform: translateY(4px); transition: opacity 0.25s, transform 0.25s; white-space: nowrap; }
+.t-line.shown { opacity: 1; transform: none; }
+.t-cmd { color: var(--violet); font-weight: 700; }
+[data-theme="light"] .t-cmd { color: var(--violet); }
+.t-err { color: var(--amber); }
+.t-ok { color: var(--cyan); }
+.nf-term kbd { font: 600 11px var(--font-mono); padding: 2px 8px; border-radius: 6px; background: var(--surface-3); border: 1px solid var(--border-strong); color: var(--text); }
+.t-caret { display: inline-block; width: 8px; height: 15px; vertical-align: -2px; background: var(--violet); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.nf-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.nf-social { display: flex; justify-content: center; gap: 26px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
+.nf-social a { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--text-muted); transition: color 0.2s; }
+.nf-social a:hover { color: var(--cyan); }
+
+@media (max-width: 480px) {
+  .nf-actions .btn { flex: 1 1 100%; }
+}
+
+/* keep long paths inside the card on small screens */
+body.nf { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+.nf-card { min-width: 0; }
+.t-line { white-space: normal; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .nf-term { font-size: 12px; padding: 14px; } }

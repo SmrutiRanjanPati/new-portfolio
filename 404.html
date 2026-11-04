@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Not Found | Smruti Ranjan</title>
+    <meta name="description" content="This page doesn't exist. Head back to Smruti Ranjan's portfolio." />
+    <meta name="robots" content="noindex, nofollow" />
+    <!-- GitHub Pages serves this file for any missing URL, even nested ones,
+         so make every link below resolve from the site root. -->
+    <script>
+      if (location.protocol.indexOf("http") === 0) {
+        document.write('<base href="' + (location.hostname.slice(-10) === "github.io" ? "/Smruti-ranjan/" : "/") + '">');
+      }
+      </script>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/404.css" />
+    <script>
+      (function () {
+        var s = localStorage.getItem("sr-theme");
+        var t = s || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        if (t === "light") document.documentElement.setAttribute("data-theme", "light");
+      })();
+    </script>
+  </head>
+
+  <body class="nf">
+    <div class="nf-glow" id="glow" aria-hidden="true"></div>
+    <div class="nf-scan" aria-hidden="true"></div>
+
+    <button class="theme-toggle nf-theme" id="themeToggle" type="button" aria-label="Toggle dark / light mode">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>
+    </button>
+
+    <main class="nf-card" role="main">
+      <a class="nf-brand" href="index.html" aria-label="Smruti Ranjan, home">
+        <span class="brand-mark" aria-hidden="true">SR</span>
+        <span class="brand-name">Smruti Ranjan</span>
+      </a>
+
+      <!-- broken route trace -->
+      <div class="nf-trace" aria-hidden="true">
+        <svg viewBox="0 0 380 60">
+          <path class="t-ok" d="M20 30 H140" />
+          <path class="t-break" d="M140 30 H360" />
+          <circle class="t-node" cx="20" cy="30" r="7" /><text class="t-label" x="20" y="52" text-anchor="middle">start</text>
+          <circle class="t-node" cx="140" cy="30" r="7" /><text class="t-label" x="140" y="52" text-anchor="middle">last-known</text>
+          <circle class="t-ping" cx="215" cy="30" r="9" />
+          <circle class="t-ping" cx="215" cy="30" r="9" style="animation-delay: 0.6s" />
+          <circle class="t-node is-error" cx="215" cy="30" r="7" /><text class="t-label is-error" x="215" y="52" text-anchor="middle">404</text>
+          <circle class="t-node is-ghost" cx="360" cy="30" r="7" /><text class="t-label" x="360" y="52" text-anchor="middle">target</text>
+        </svg>
+      </div>
+
+      <div class="nf-num" aria-hidden="true" data-text="404">404</div>
+
+      <h1>You've wandered off the grid.</h1>
+      <p class="nf-desc">This page doesn't exist - or maybe it did once, but it doesn't anymore. Either way, there's nothing to render here.</p>
+
+      <div class="nf-term" id="terminal" aria-label="Terminal output">
+        <div class="t-line" data-line>$ <span class="t-cmd">navigate</span> --to <span class="t-cmd" id="pathTarget">"/path"</span></div>
+        <div class="t-line" data-line><span class="t-err">✗ Error: Route not found in sitemap</span></div>
+        <div class="t-line" data-line>$ <span class="t-cmd">suggest</span> --fix</div>
+        <div class="t-line" data-line><span class="t-ok">→ Press</span> <kbd>Enter</kbd> <span class="t-ok">to return home</span></div>
+        <div class="t-line" data-line>$ <span class="t-caret"></span></div>
+      </div>
+
+      <nav class="nf-actions" aria-label="Recovery navigation">
+        <a class="btn btn-solid btn-xl" href="index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Back to Portfolio</a>
+        <a class="btn btn-outline btn-xl" href="work.html"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> View work</a>
+        <a class="btn btn-outline btn-xl" href="Smruti_Ranjan_Pati_Resume.pdf" download><i class="fa-solid fa-download" aria-hidden="true"></i> Resume</a>
+      </nav>
+
+      <div class="nf-social">
+        <a href="https://www.linkedin.com/in/smruti-ranjan007" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i> LinkedIn</a>
+        <a href="https://github.com/SmrutiRanjanPati" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a>
+      </div>
+    </main>
+
+    <script src="js/not-found.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+    <title>Case study - Smruti Ranjan</title>
+    <meta name="description" content="Case study by Smruti Ranjan Pati, UX/UI Product Designer." />
+    <meta name="theme-color" content="#05060B" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <script>
+      (function () {
+        var saved = localStorage.getItem("sr-theme");
+        var theme = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        if (theme === "light") document.documentElement.setAttribute("data-theme", "light");
+      })();
+    </script>
+  </head>
+
+  <!--
+    CASE-STUDY TEMPLATE
+    One page, many case studies:  case-study.html?id=<id>
+    The content comes from js/data.js (see the "studies" list there), so adding a
+    case study means adding one entry, not copying this file.
+  -->
+  <body data-page="work">
+    <div data-component="header"></div>
+    <main id="caseStudy">
+      <a class="cs-back" href="work.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> All work</a>
+      <div id="tplRoot"></div>
+      <div data-component="footer"></div>
+    </main>
+
+    <script src="js/data.js" defer></script>
+    <script src="js/illustrations.js" defer></script>
+    <script src="js/components.js" defer></script>
+    <script src="js/case-study-template.js" defer></script>
+  </body>
+</html>
