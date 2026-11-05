@@ -22,6 +22,7 @@
         </div>
         <div class="work-info">
           <span class="work-tag">${s.tag}</span>
+          ${soon ? '<span class="work-soon">Details coming soon</span>' : ""}
           <h3>${s.title}</h3>
           <p>${s.summary}</p>
           <span class="work-more">${soon ? "Open page" : "View case study"} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>

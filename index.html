@@ -66,10 +66,13 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/webfonts/fa-solid-900.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/webfonts/fa-brands-400.woff2" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
+    <link rel="preload" as="image" href="assets/2151604604.webp" fetchpriority="high" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/pages.css" />
     <script>
@@ -274,10 +277,10 @@
       <div data-component="footer"></div>
     </main>
 
-    <script src="js/data.js" defer></script>
-    <script src="js/illustrations.js" defer></script>
-    <script src="js/components.js" defer></script>
-    <script src="js/work.js" defer></script>
-    <script src="js/home.js" defer></script>
+    <script src="js/data.js" defer blocking="render"></script>
+    <script src="js/illustrations.js" defer blocking="render"></script>
+    <script src="js/components.js" defer blocking="render"></script>
+    <script src="js/work.js" defer blocking="render"></script>
+    <script src="js/home.js" defer blocking="render"></script>
   </body>
 </html>

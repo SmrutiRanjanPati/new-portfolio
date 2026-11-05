@@ -9,17 +9,27 @@
     <!-- GitHub Pages serves this file for any missing URL, even nested ones,
          so make every link below resolve from the site root. -->
     <script>
-      if (location.protocol.indexOf("http") === 0) {
-        document.write('<base href="' + (location.hostname.slice(-10) === "github.io" ? "/Smruti-ranjan/" : "/") + '">');
-      }
-      </script>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+      // GitHub Pages serves this file for ANY missing URL, even nested ones (/repo/a/b/c),
+      // so every relative link must resolve from the site root. We set <base> first and then
+      // write the local CSS/icon links ourselves so the browser never requests them from the wrong folder.
+      // Project sites live under /<repo-name>/ : change REPO if you rename the repository.
+      var REPO = "/Smruti-ranjan/";
+      var BASE = /(^|\.)github\.io$/.test(location.hostname) ? REPO : "/";
+      if (location.protocol.indexOf("http") === 0) document.write('<base href="' + BASE + '">');
+      document.write(
+        '<link rel="icon" type="image/x-icon" href="assets/favicon.ico">' +
+        '<link rel="stylesheet" href="css/style.css">' +
+        '<link rel="stylesheet" href="css/404.css">'
+      );
+    </script>
+    <noscript>
+      <link rel="stylesheet" href="/Smruti-ranjan/css/style.css" />
+      <link rel="stylesheet" href="/Smruti-ranjan/css/404.css" />
+    </noscript>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/404.css" />
     <script>
       (function () {
         var s = localStorage.getItem("sr-theme");
@@ -83,6 +93,6 @@
       </div>
     </main>
 
-    <script src="js/not-found.js" defer></script>
+    <script>document.write('<script src="js/not-found.js" defer><\/script>');</script>
   </body>
 </html>

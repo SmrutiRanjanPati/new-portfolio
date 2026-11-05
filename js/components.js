@@ -25,7 +25,7 @@
     { key: "career", href: "career.html", label: "Career", icon: "fa-briefcase" },
     { key: "contact", href: "contact.html", label: "Contact", icon: "fa-envelope" },
   ];
-  const TABS = ["home", "work", "skills", "career", "contact"];
+  const TABS = ["home", "work", "career"];
   const SITE = {
     brand: "Smruti Ranjan",
     mark: "SR",
@@ -55,38 +55,13 @@
     document.head.appendChild(l);
   }
 
-  // ---------- smooth page changes ----------
-  // Page content fades/slides out, the next page fades/slides in. Header and tab bar stay put.
-  const calmMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let leaving = false;
+  // ---------- page changes ----------
+  // The browser's view transitions (see style.css) cross-fade pages natively, so links
+  // are left alone. srNavigate is only for navigation triggered from code (search, tabs).
   window.srNavigate = function (href) {
-    if (leaving) return;
-    if (calmMotion) { window.location.href = href; return; }
-    leaving = true;
     if (window.__saveCursor) window.__saveCursor();
-    document.documentElement.classList.add("page-leaving");
-    setTimeout(() => { window.location.href = href; }, 170);
+    window.location.href = href;
   };
-  // coming back with the browser's Back button: undo the "leaving" state
-  window.addEventListener("pageshow", (e) => {
-    leaving = false;
-    document.documentElement.classList.remove("page-leaving");
-  });
-  document.addEventListener("click", (e) => {
-    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    const a = e.target.closest && e.target.closest("a[href]");
-    if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
-    const href = a.getAttribute("href");
-    if (!href || /^(mailto:|tel:|javascript:)/i.test(href)) return;
-    let u;
-    try { u = new URL(a.href, location.href); } catch (_) { return; }
-    if (u.origin !== location.origin && location.protocol !== "file:") return; // external
-    if (location.protocol === "file:" && u.protocol !== "file:") return;
-    if (/\.(pdf|zip|png|jpe?g|webp|svg)$/i.test(u.pathname)) return;
-    if (u.pathname === location.pathname && u.search === location.search) return; // same page / #anchor
-    e.preventDefault();
-    window.srNavigate(a.href);
-  });
 
   // ---------- analytics (skipped if the page already set up gtag) ----------
   if (typeof window.gtag !== "function") {
@@ -131,13 +106,27 @@
       </div>
     </header>`;
 
+  // bar = Home, Work, Career + "More"; More opens a sheet with the remaining pages
+  const MORE = [
+    { key: "skills", hint: "Everything I work with" },
+    { key: "about", hint: "Approach, awards, education" },
+    { key: "contact", hint: "Email, LinkedIn, GitHub" },
+  ];
   const TabBar = () => `
+    <div class="more-scrim" id="moreScrim"></div>
+    <div class="more-sheet" id="moreSheet" role="menu" aria-label="More pages" aria-hidden="true">
+      ${MORE.map((m) => {
+        const p = PAGES.find((x) => x.key === m.key);
+        return `<a href="${p.href}" role="menuitem" class="more-item ${m.key === page ? "active" : ""}"><span class="mi-ico"><i class="fa-solid ${p.icon}" aria-hidden="true"></i></span><span>${p.label}<small>${m.hint}</small></span><i class="fa-solid fa-chevron-right mi-go" aria-hidden="true"></i></a>`;
+      }).join("")}
+    </div>
     <nav class="tabbar" aria-label="Mobile">
       <span class="tab-indicator" aria-hidden="true"></span>
       ${TABS.map((k) => {
         const p = PAGES.find((x) => x.key === k);
         return `<a href="${p.href}" draggable="false" class="tab-item ${k === page ? "active" : ""}"><i class="fa-solid ${p.icon}" aria-hidden="true"></i><span>${p.label}</span></a>`;
       }).join("")}
+      <button type="button" id="moreBtn" class="tab-item tab-more ${MORE.some((m) => m.key === page) ? "active" : ""}" aria-haspopup="menu" aria-expanded="false" aria-controls="moreSheet"><i class="fa-solid fa-ellipsis" aria-hidden="true"></i><span>More</span></button>
     </nav>`;
 
   // original footer (unchanged from the first version of the site)
@@ -168,7 +157,7 @@
 
   // ---------- mount ----------
   // remove any old hand-written header / footer / cursor / tab bar (case-study pages)
-  document.querySelectorAll("body > header.topnav, .cursor-dot, .cursor-ring, .tabbar, footer.site-footer").forEach((el) => el.remove());
+  document.querySelectorAll("body > header.topnav, .cursor-dot, .cursor-ring, .tabbar, .more-sheet, .more-scrim, footer.site-footer").forEach((el) => el.remove());
 
   const hSlot = document.querySelector('[data-component="header"]');
   if (hSlot) hSlot.outerHTML = Header();
@@ -210,7 +199,7 @@
     ...D.skills.map((s) => ({
       label: s.name,
       hint: "Skill · " + (D.groups.find((g) => g.key === s.group) || {}).label,
-      href: "about.html?q=" + encodeURIComponent(s.name),
+      href: "skills.html?q=" + encodeURIComponent(s.name),
     })),
   ];
   const pal = document.getElementById("palette");
@@ -258,7 +247,14 @@
       { threshold: 0.05 }
     );
     // pages that build content with JS call window.srReveal(container) afterwards
-    window.srReveal = (scope) => (scope || document).querySelectorAll(".reveal:not(.in)").forEach((el) => io.observe(el));
+    const onScreen = (el) => { const r = el.getBoundingClientRect(); return r.top < window.innerHeight * 0.98 && r.bottom > 0; };
+    window.srReveal = (scope) => (scope || document).querySelectorAll(".reveal:not(.in)").forEach((el) => {
+      if (onScreen(el)) {
+        // already visible when the page opens: show at once, no fade (a fade here reads as "loading")
+        el.classList.add("instant", "in");
+        requestAnimationFrame(() => requestAnimationFrame(() => el.classList.remove("instant")));
+      } else io.observe(el);
+    });
     window.srReveal();
 
     // stat counters count up when visible
@@ -362,6 +358,31 @@
     if (t) { t.classList.add("peek"); if (navigator.vibrate) navigator.vibrate(6); }
   }
 
+  // ---- "More" sheet ----
+  const moreBtn = bar.querySelector(".tab-more");
+  const sheet = document.getElementById("moreSheet");
+  const scrim = document.getElementById("moreScrim");
+  const sheetOpen = () => !!sheet && sheet.classList.contains("show");
+  function setMore(open, keepLens) {
+    if (!sheet || !moreBtn) return;
+    sheet.classList.toggle("show", open);
+    scrim.classList.toggle("show", open);
+    bar.classList.toggle("more-open", open);
+    moreBtn.classList.toggle("open", open);
+    sheet.setAttribute("aria-hidden", String(!open));
+    moreBtn.setAttribute("aria-expanded", String(open));
+    if (open) {
+      ind.style.width = moreBtn.offsetWidth + "px";
+      ind.style.height = moreBtn.offsetHeight + "px";
+      setX(moreBtn.offsetLeft, moreBtn);
+    } else if (!keepLens) place();
+  }
+  if (scrim) scrim.addEventListener("click", () => setMore(false));
+  if (sheet) sheet.addEventListener("click", (e) => { if (e.target.closest("a")) setMore(false, true); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && sheetOpen()) { setMore(false); if (moreBtn) moreBtn.focus(); } });
+  window.addEventListener("resize", () => { if (window.innerWidth > 860 && sheetOpen()) setMore(false); });
+  window.addEventListener("pageshow", () => setMore(false));
+
   bar.addEventListener("pointerdown", (e) => {
     if (e.pointerType === "mouse" && e.button !== 0) return;
     pressed = true; moved = false; dragging = false;
@@ -406,6 +427,8 @@
     ind.style.width = target.offsetWidth + "px";
     setX(target.offsetLeft, target);
     if (e && e.type === "pointercancel") { place(); return; }
+    if (target === moreBtn) { setMore(true); return; } // released on "More": open the sheet
+    if (sheetOpen()) setMore(false, true);
     if (target !== active() && target.getAttribute("href")) {
       tabs.forEach((t) => t.classList.toggle("active", t === target));
       setTimeout(() => window.srNavigate(target.getAttribute("href")), 110);
@@ -419,7 +442,9 @@
 
   // tapping a tab: slide the lens there first, then go
   tabs.forEach((t) => t.addEventListener("click", (e) => {
-    if (t.classList.contains("active")) return;
+    if (t === moreBtn) { e.preventDefault(); setMore(!sheetOpen()); return; }
+    if (sheetOpen()) setMore(false, true);
+    if (t.classList.contains("active")) { e.preventDefault(); if (!bar.classList.contains("more-open")) place(); return; } // already here: don't reload
     e.preventDefault();
     tabs.forEach((x2) => x2.classList.toggle("active", x2 === t));
     ind.style.width = t.offsetWidth + "px";
@@ -505,7 +530,7 @@ mountArt();
   const st = document.createElement("style");
   st.textContent =
     "html.water-cursor .cursor-dot,html.water-cursor .cursor-ring{display:none!important}" +
-    "#waterCursor{position:fixed;left:0;top:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483000}";
+    "#waterCursor{position:fixed;left:0;top:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483000;view-transition-name:wcursor}";
   document.head.appendChild(st);
   document.documentElement.classList.add("water-cursor");
 
