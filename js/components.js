@@ -475,6 +475,11 @@ mountArt();
   const file = (location.pathname.split("/").pop() || "index.html").toLowerCase();
   const resume = "Smruti_Ranjan_Pati_Resume.pdf";
   const skip = document.body.dataset.cta === "off";
+  // Work page -> point to About. Every other page -> point to Work.
+  const onWork = file === "work.html";
+  const ctaLink = onWork
+    ? { href: "about.html", label: "Explore about me" }
+    : { href: "work.html", label: "View my work" };
 
   if (!skip && !document.querySelector(".cta-band")) {
     const footer = document.querySelector("footer.site-footer");
@@ -486,7 +491,7 @@ mountArt();
           <h2>See the work. Then let's talk.</h2>
           <p>Browse the case studies, or grab my resume and get in touch.</p>
           <div class="cta-actions">
-            <a class="btn btn-solid btn-lg magnetic" href="work.html">View my work <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            <a class="btn btn-solid btn-lg magnetic" href="${ctaLink.href}">${ctaLink.label}<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             <a class="btn btn-outline btn-lg magnetic" href="${resume}" download><i class="fa-solid fa-download" aria-hidden="true"></i> Download resume</a>
           </div>
         </div>
@@ -505,9 +510,13 @@ mountArt();
 
   // floating dock (desktop): appears after scrolling, keeps "work" + "resume" one click away
   if (file !== "contact.html" && !document.querySelector(".cta-dock")) {
+    // On the Work page "View work" points at the page you are already on, so offer About instead.
+    const dockLink = onWork
+      ? '<a href="about.html"><i class="fa-solid fa-user" aria-hidden="true"></i> Explore about me</a>'
+      : '<a href="work.html"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> View my work</a>';
     document.body.insertAdjacentHTML("beforeend", `
       <div class="cta-dock" aria-label="Quick actions">
-        <a href="work.html"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> View work</a>
+        ${dockLink}
         <a class="primary" href="${resume}" download><i class="fa-solid fa-download" aria-hidden="true"></i> Resume</a>
       </div>`);
     const dock = document.querySelector(".cta-dock");

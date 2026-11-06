@@ -15,13 +15,15 @@
       // Project sites live under /<repo-name>/ : change REPO if you rename the repository.
       var REPO = "/Smruti-ranjan/";
       var BASE = /(^|\.)github\.io$/.test(location.hostname) ? REPO : "/";
+      window.SR_BASE = location.protocol.indexOf("http") === 0 ? BASE : "";
       if (location.protocol.indexOf("http") === 0) document.write('<base href="' + BASE + '">');
       document.write(
-        '<link rel="icon" type="image/x-icon" href="assets/favicon.ico">' +
+        '<link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">' +
         '<link rel="stylesheet" href="css/style.css">' +
         '<link rel="stylesheet" href="css/404.css">'
       );
     </script>
+
     <noscript>
       <link rel="stylesheet" href="/Smruti-ranjan/css/style.css" />
       <link rel="stylesheet" href="/Smruti-ranjan/css/404.css" />
@@ -49,7 +51,7 @@
     </button>
 
     <main class="nf-card" role="main">
-      <a class="nf-brand" href="index.html" aria-label="Smruti Ranjan, home">
+      <a class="nf-brand" data-go="index.html" href="index.html" aria-label="Smruti Ranjan, home">
         <span class="brand-mark" aria-hidden="true">SR</span>
         <span class="brand-name">Smruti Ranjan</span>
       </a>
@@ -82,9 +84,9 @@
       </div>
 
       <nav class="nf-actions" aria-label="Recovery navigation">
-        <a class="btn btn-solid btn-xl" href="index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Back to Portfolio</a>
-        <a class="btn btn-outline btn-xl" href="work.html"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> View work</a>
-        <a class="btn btn-outline btn-xl" href="Smruti_Ranjan_Pati_Resume.pdf" download><i class="fa-solid fa-download" aria-hidden="true"></i> Resume</a>
+        <a class="btn btn-solid btn-xl" data-go="index.html" href="index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Back to Portfolio</a>
+        <a class="btn btn-outline btn-xl" data-go="work.html" href="work.html"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> View work</a>
+        <a class="btn btn-outline btn-xl" data-go="Smruti_Ranjan_Pati_Resume.pdf" href="Smruti_Ranjan_Pati_Resume.pdf" download><i class="fa-solid fa-download" aria-hidden="true"></i> Resume</a>
       </nav>
 
       <div class="nf-social">
@@ -93,6 +95,6 @@
       </div>
     </main>
 
-    <script>document.write('<script src="js/not-found.js" defer><\/script>');</script>
+    <script src="js/not-found.js" defer></script>
   </body>
 </html>

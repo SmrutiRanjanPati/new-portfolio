@@ -120,6 +120,8 @@ body.nf::before {
 .t-caret { display: inline-block; width: 8px; height: 15px; vertical-align: -2px; background: var(--violet); animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
+.btn-xl { padding: 14px 26px; font-size: 15.5px; gap: 9px; }
+.btn i { font-size: 0.9em; }
 .nf-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 .nf-social { display: flex; justify-content: center; gap: 26px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
 .nf-social a { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--text-muted); transition: color 0.2s; }

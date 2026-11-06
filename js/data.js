@@ -73,6 +73,23 @@ window.SITE_DATA = {
     },
   ],
 
+  // ---- About page: certifications + education ----
+  // Add a certificate by copying one block. The About page sorts newest first,
+  // builds the issuer filters, and adds a "Show all" button once there are more than 6.
+  //   date: "YYYY-MM" (used for sorting and shown as "Mar 2026")
+  //   logo: optional image path; without it a small initials tile is shown
+  //   url:  optional link to the credential; adds a "View credential" link
+  certifications: [
+    { title: "Figma UI UX Design Essentials", issuer: "Udemy", date: "2026-11", logo: "./assets/udemy-logo.webp", url: "" },
+    { title: "Liferay Application Developer", issuer: "Liferay", date: "2026-08", logo: "./assets/liferay-logo.webp", url: "" },
+    { title: "Building Enterprise Websites with Liferay", issuer: "Liferay", date: "2026-03", logo: "./assets/liferay-logo.webp", url: "" },
+  ],
+
+  education: [
+    { short: "SRM", degree: "Master of Computer Applications (MCA)", school: "SRM University · Delhi, India", years: "2021 - 2023" },
+    { short: "GA", degree: "Bachelor of Computer Application (BCA)", school: "Govt. Autonomous College · Bhawanipatna, India", years: "2018 - 2021" },
+  ],
+
   groups: [
     { key: "design", label: "Design" },
     { key: "tools", label: "Tools" },

@@ -2118,3 +2118,105 @@
     overflow: hidden;
   }
 }
+/* =====================================================================
+   ABOUT: certifications grid + education
+   Built by js/about.js from js/data.js. The grid adds columns as space
+   allows, so 3 certificates or 30 both stay tidy.
+   ===================================================================== */
+.cert-count{
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+.cert-filters{
+  margin-bottom: 16px;
+}
+
+.cert-grid,
+.edu-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+  gap: 12px;
+}
+
+.edu-grid{
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+
+.cert-card,
+.edu-card{
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 0 var(--glass-edge) inset;
+  transition:
+    transform 0.3s var(--ease),
+    border-color 0.25s,
+    background 0.25s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cert-card:hover,
+  .edu-card:hover{
+    background: var(--surface-3);
+    border-color: var(--forest-line);
+    transform: translateY(-3px);
+  }
+}
+
+.cert-body{
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cert-body h3{
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.cert-body p{
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+
+.cert-body .exp-date{
+  white-space: normal;
+}
+
+.cert-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  width: fit-content;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--forest);
+}
+
+.cert-link i{
+  font-size: 10px;
+}
+
+.cert-more{
+  display: flex;
+  justify-content: center;
+}
+
+.cert-more .btn{
+  margin-top: 16px;
+}
+
+.cert-more .btn[hidden]{
+  display: none;
+}

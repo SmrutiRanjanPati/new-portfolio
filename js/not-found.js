@@ -8,8 +8,12 @@
   const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   lines.forEach((l, i) => (calm ? l.classList.add("shown") : setTimeout(() => l.classList.add("shown"), 260 + i * 320)));
 
+  // Point every recovery link at the site root, whatever depth the bad URL had.
+  const BASE = window.SR_BASE || "";
+  document.querySelectorAll("[data-go]").forEach((a) => a.setAttribute("href", BASE + a.dataset.go));
+
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && document.activeElement === document.body) window.location.href = document.querySelector(".nf-brand").href;
+    if (e.key === "Enter" && document.activeElement === document.body) window.location.href = BASE + "index.html";
   });
 
   const glow = document.getElementById("glow");
