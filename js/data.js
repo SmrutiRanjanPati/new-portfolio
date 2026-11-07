@@ -20,7 +20,7 @@ window.SITE_DATA = {
       summary:
         "A centralized B2B portal turning email-and-spreadsheet complaint handling into a traceable, role-based 8D resolution workflow.",
       visual: "flow",
-      href: "customer-care-portal.html",
+      href: "case-study.html?id=customer-care-portal",
       published: true,
       // shown in the quick view that opens when a work card is clicked (all optional)
       role: "UX/UI Designer",
@@ -33,6 +33,210 @@ window.SITE_DATA = {
         "Role-based dashboards that show the next action, not just a count",
         "Dedicated action tracking with owners, due dates and evidence",
         "QC review with section-level feedback before the customer sees a report",
+      ],
+      // full write-up, shown as numbered sections on case-study.html?id=customer-care-portal
+      sections: [
+        {
+          title: "Overview",
+          body: [
+            "Manufacturing customers expect timely responses, transparent communication, and documented proof that quality issues have been resolved. The existing complaint process relied heavily on emails, spreadsheets, and manual follow-ups. This made it difficult to understand complaint status, assign ownership, monitor corrective actions, and verify effectiveness.",
+            "The Customer Care Portal was proposed as a centralized B2B platform that connects customers, complaint teams, investigation owners, and action owners through one structured workflow.",
+            "The product vision was to transform complaint management from a fragmented communication process into a transparent, accountable, and traceable resolution journey.",
+          ],
+        },
+        {
+          title: "Project goals",
+          points: [
+            "Centralize all customer complaints and supporting evidence.",
+            "Provide real-time visibility into complaint status and ownership.",
+            "Standardize the 8D investigation and root-cause analysis process.",
+            "Track corrective, preventive, and containment actions.",
+            "Reduce manual coordination and email dependency.",
+            "Improve customer confidence through timely updates and final reports.",
+          ],
+        },
+        {
+          title: "My contribution",
+          points: [
+            "Mapped the end-to-end complaint-resolution workflow.",
+            "Defined role-based experiences and information architecture.",
+            "Designed dashboard, complaint list, complaint detail, 8D, action, and QC review experiences.",
+            "Created interaction patterns for evidence upload, status tracking, assignment, and approvals.",
+            "Translated complex quality-management activities into a clear enterprise UX.",
+          ],
+        },
+        {
+          title: "The problem",
+          body: [
+            "The previous process began when a customer raised a complaint through email or phone. The complaint creator collected additional details, the coordinator assigned an owner, and the resolution team exchanged documents and updates until the 8D report was completed.",
+            "Because each stage was handled through separate messages and files, stakeholders lacked a shared view of the complaint lifecycle. Customers had limited visibility, while internal teams spent significant time searching for information and following up with owners.",
+          ],
+          points: [
+            "Complaints managed through multiple emails - information became scattered and difficult to retrieve.",
+            "No centralized dashboard - management could not quickly understand complaint volume or bottlenecks.",
+            "Manual assignment and follow-ups - investigation and corrective actions could be delayed.",
+            "Evidence stored across attachments - reviewing proof and previous decisions became time-consuming.",
+            "Unclear action ownership - corrective actions could remain pending without visibility.",
+            "No structured closure verification - teams could not easily confirm whether the solution remained effective.",
+          ],
+        },
+        {
+          title: "Users and roles",
+          body: [
+            "The key UX challenge was to support five roles with different responsibilities while keeping every user connected to the same complaint record.",
+          ],
+          points: [
+            "Customer - raises and tracks complaints; reviews resolution. Needs visibility and confidence.",
+            "Complaint Creator - adds detailed problem information and evidence. Needs accurate records.",
+            "Complaint Coordinator - assigns owners, monitors progress, and performs QC review. Needs control and accountability.",
+            "Resolution Owner - leads investigation and completes the 8D report. Needs a structured investigation.",
+            "Action Owner - completes assigned corrective or preventive actions. Needs clear tasks and deadlines.",
+          ],
+        },
+        {
+          title: "End-to-end workflow",
+          body: [
+            "The solution used role-based dashboards and permissions, but maintained a shared source of truth for complaint details, actions, evidence, approvals, and activity history.",
+            "The information architecture was organized around the complaint lifecycle rather than individual departments, so users knew where to go based on the task at hand.",
+          ],
+          points: [
+            "Complaint raised - basic complaint is submitted and receives a unique ID (Customer).",
+            "Complaint documented - detailed problem information and evidence are added (Complaint Creator).",
+            "Coordination - resolution owner is assigned and priorities are confirmed (Complaint Coordinator).",
+            "Investigation - team investigates the problem and identifies root cause (Resolution Owner).",
+            "Action management - corrective and preventive actions are assigned and completed (Resolution Owner / Action Owner).",
+            "RCA and 8D completion - Fishbone, 5 Why, RCA, and 8D documentation are completed (Resolution Owner).",
+            "QC review - report is approved or returned with actionable feedback (Complaint Coordinator).",
+            "Customer review and closure - customer receives the final report and confirms resolution (Complaint Creator / Customer).",
+            "Effectiveness verification - corrective action is verified after closure (Complaint Creator).",
+          ],
+        },
+        {
+          title: "Information architecture",
+          points: [
+            "Dashboard: overview, metrics, pending work, recent complaints, alerts.",
+            "Complaints: all complaints, my complaints, assigned complaints, closed complaints.",
+            "8D Reports: reports in progress, pending review, completed reports.",
+            "Action Management: my actions, team actions, overdue actions.",
+            "Reports and Analytics: complaint trends, resolution time, recurring issues.",
+          ],
+        },
+        {
+          title: "Dashboard",
+          body: [
+            "The dashboard was designed as the central visibility layer for the portal. It does more than display complaint counts; it helps users identify what requires attention immediately.",
+            "The most important design principle was to make the next action visible, not just the current number.",
+          ],
+          points: [
+            "Total complaints",
+            "Open complaints",
+            "Complaints under investigation",
+            "Pending QC reviews",
+            "Overdue actions",
+            "Closed complaints",
+            "Average resolution time",
+            "Effectiveness verification pending",
+          ],
+        },
+        {
+          title: "Progressive complaint creation",
+          body: [
+            "The complaint submission process was divided into two levels. Customers provide basic information first, while the complaint creator completes the technical and operational details required for investigation.",
+            "The complaint detail screen acts as the single source of truth. It combines complaint information, 8D progress, actions, evidence, and the activity timeline in one place, eliminating the need to search across email threads.",
+          ],
+          points: [
+            "Basic complaint information (customer): customer and contact details, product or part number, complaint title and description, date of occurrence, priority and category, initial attachments.",
+            "Detailed complaint information (complaint creator): problem statement, quantity affected, batch or lot number, how the issue was detected, customer impact, immediate containment, supporting evidence and documents.",
+          ],
+        },
+        {
+          title: "8D report and root-cause analysis",
+          body: [
+            "The 8D report was treated as a living investigation record rather than a static document completed at the end. Each section can be updated as the investigation progresses.",
+          ],
+          points: [
+            "D0 - Prepare and plan the response.",
+            "D1 - Establish the investigation team.",
+            "D2 - Describe the problem using measurable information.",
+            "D3 - Implement immediate containment actions.",
+            "D4 - Identify and validate the root cause.",
+            "D5 - Select permanent corrective actions.",
+            "D6 - Implement and validate corrective actions.",
+            "D7 - Prevent recurrence through systemic improvements.",
+            "D8 - Recognize the team and close the process.",
+          ],
+        },
+        {
+          title: "Analysis tools",
+          points: [
+            "Fishbone analysis for exploring possible causes across Man, Machine, Method, Material, Measurement, and Environment.",
+            "5 Why analysis for moving from the observed symptom to the underlying cause.",
+            "RCA document for summarizing findings, evidence, root cause, and selected actions.",
+          ],
+        },
+        {
+          title: "Action management",
+          body: [
+            "Corrective and preventive actions are central to successful complaint resolution. The portal provides a dedicated action-management experience so that each action has a clear owner, due date, expected outcome, and evidence requirement.",
+            "Each action moves through: Created, Assigned, In Progress, Evidence Submitted, Resolution Owner Review, Approved / Rework Requested, Completed.",
+          ],
+          points: [
+            "Action ID - unique reference connected to the complaint.",
+            "Action description - defines what must be completed.",
+            "Action type - corrective, preventive, or containment.",
+            "Action owner - identifies the responsible person or team.",
+            "Due date - supports deadline and overdue tracking.",
+            "Evidence - stores proof of completion.",
+            "Review status - shows whether the action is approved or needs rework.",
+          ],
+        },
+        {
+          title: "QC review and customer closure",
+          body: [
+            "The QC stage ensures that the 8D report is complete, accurate, and ready to be shared with the customer. Reviewers can verify complaint details, root cause, action evidence, RCA documentation, and effectiveness planning.",
+            "Complaint closure and effectiveness verification were intentionally separated. A complaint may be closed after customer confirmation, while effectiveness verification can happen later to confirm that the corrective action remains successful.",
+          ],
+          points: [
+            "Approved reports move forward to customer review.",
+            "Incomplete reports are returned with section-level feedback.",
+            "Feedback identifies what must be corrected, who must update it, and what happens next.",
+            "The customer can review the final report, provide feedback, and confirm resolution.",
+          ],
+        },
+        {
+          title: "Key UX decisions",
+          points: [
+            "Role-based dashboards - prevents information overload and surfaces the work relevant to each user.",
+            "Progressive disclosure - customers can raise complaints without completing a complex technical form.",
+            "Single complaint record - creates one reliable place for details, evidence, actions, and history.",
+            "Structured 8D workflow - makes a complex quality methodology easier to complete consistently.",
+            "Dedicated action management - improves accountability by connecting owners, due dates, and evidence.",
+            "Activity timeline - provides traceability for every important update and handoff.",
+            "Actionable QC feedback - reduces rework and avoids unclear approval comments.",
+          ],
+        },
+        {
+          title: "Expected impact",
+          body: [
+            "The following outcomes are proposed targets for the product concept. They should be replaced with validated metrics if the portal is implemented and measured.",
+          ],
+          points: [
+            "Customer experience - customers can track complaints without repeated follow-up emails.",
+            "Operational visibility - management can monitor complaint volume, status, ownership, and bottlenecks.",
+            "Resolution process - a standardized 8D workflow improves consistency and traceability.",
+            "Action completion - owners and due dates make corrective actions easier to monitor.",
+            "Quality assurance - QC review provides a controlled approval stage before customer communication.",
+            "Knowledge management - centralized evidence and RCA records support future problem prevention.",
+          ],
+        },
+        {
+          title: "Conclusion",
+          body: [
+            "The Customer Care Portal is more than a complaint-tracking system. It is a customer-centric quality ecosystem that connects complaint intake, investigation, corrective actions, quality review, customer communication, and effectiveness verification.",
+            "By replacing fragmented email-based coordination with a shared, role-based workflow, the product creates visibility at every stage and accountability for every action.",
+            "Every complaint should have a clear status, every action should have an owner, and every resolution should have traceable evidence.",
+          ],
+        },
       ],
     },
     {
